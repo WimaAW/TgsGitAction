@@ -1,0 +1,39 @@
+name: Run Mini Project
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install aiohttp openpyxl
+
+      - name: Run Mini Project
+        env:  # Menyediakan environment variable ke script Python
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        run: |
+          python Mini_Project.py
+
+      - name: Push output file to repository
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add output_file.xlsx
+          git commit -m "Add updated output_file.xlsx"
+          git push
