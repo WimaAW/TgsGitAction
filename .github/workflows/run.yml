@@ -32,8 +32,8 @@ jobs:
 
       - name: Push output file to repository
         run: |
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "actions@github.com"
+          git config --local user.name "WimaAW"
+          git config --local user.email "someonewima@gmail.com"
           git add output_file.xlsx
           git commit -m "Add updated output_file.xlsx"
           git push
