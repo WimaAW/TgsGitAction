@@ -1,4 +1,4 @@
-name: TEST DEMO
+name: Run Mini Project
 
 on:
   push:
